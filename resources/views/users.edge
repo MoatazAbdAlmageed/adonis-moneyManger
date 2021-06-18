@@ -1,0 +1,41 @@
+@layout('layouts/app')
+
+@section('content')
+
+
+
+<table class="table table is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @each(user in users)
+
+    <tr>
+      <th>{{ user.name }} </th>
+      <th>{{ user.age }} </th>
+    </tr>
+
+    @end
+
+  </tbody>
+</table>
+
+
+
+@each(anchor in users.getUrlsForRange(1, users.lastPage))
+<a href="{{ anchor.url }}">
+  {{ anchor.page }}
+</a>
+@endeach
+
+<form method="post" action="/user/">
+  <input type="text" name="name" id="">
+  <input type="submit" value="Go">
+</form>
+
+@endsection
