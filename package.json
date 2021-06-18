@@ -20,7 +20,7 @@
     "@adonisjs/lucid": "^15.0.1",
     "@adonisjs/repl": "^3.0.0",
     "@adonisjs/session": "^6.0.0",
-    "@adonisjs/shield": "^7.0.0",
+    "@adonisjs/shield": "^7.0.4",
     "@adonisjs/view": "^6.0.0",
     "luxon": "^1.27.0",
     "mysql": "^2.18.1",

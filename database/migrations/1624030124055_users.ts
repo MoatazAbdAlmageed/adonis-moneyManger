@@ -7,7 +7,8 @@ export default class Users extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
       table.string("name").notNullable();
-      table.string("age").notNullable();
+      table.string("email").notNullable();
+      table.date("dateOfBirth").notNullable();
       table.boolean("is_completed").defaultTo(0);
       table.timestamps(1);
     });

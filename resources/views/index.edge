@@ -8,7 +8,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Age</th>
+      <th>Date Of Birth</th>
+      <th>Email</th>
     </tr>
   </thead>
   <tbody>
@@ -16,8 +17,9 @@
     @each(user in users)
 
     <tr>
-      <th>{{ user.name }} </th>
-      <th>{{ user.age }} </th>
+      <th><a href="user/{{ user.id }}">{{ user.name }}</a> </th>
+      <th>{{ user.dateOfBirth }} </th>
+      <th>{{ user.email }} </th>
     </tr>
 
     @end
@@ -33,8 +35,11 @@
 </a>
 @endeach
 
-<form method="post" action="/user/">
-  <input type="text" name="name" id="">
+<form method="post" action="/">
+  {{csrfField()}}
+  <input type="text" name="name" >
+  <input type="text" name="email" >
+  <input type="date" name="dateOfBirth">
   <input type="submit" value="Go">
 </form>
 
