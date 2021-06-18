@@ -8,8 +8,10 @@ export default class Users extends BaseSchema {
       table.increments("id").primary();
       table.string("name").notNullable();
       table.string("email").notNullable();
-      table.date("dateOfBirth").notNullable();
-      table.boolean("is_completed").defaultTo(0);
+      table.text("bio");
+      table.string("avatar");
+      table.enum("gender", ["Male", "Female"]);
+      table.date("dateOfBirth");
       table.timestamps(1);
     });
   }

@@ -15,6 +15,15 @@ export default class User extends BaseModel {
   public email: string;
 
   @column()
+  public gender: string;
+
+  @column()
+  public avatar: string;
+
+  @column()
+  public bio: string;
+
+  @column()
   public isCompleted: boolean;
 
   @column.dateTime({ autoCreate: true })
