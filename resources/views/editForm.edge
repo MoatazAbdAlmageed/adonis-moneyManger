@@ -1,6 +1,6 @@
 <h1>Edit Customer</h1>
 
-<form method="post" action="{{`/${user.id}/?_method=patch`}}">
+<form method="post" action="{{`/${customer.id}/?_method=patch`}}">
   {{csrfField()}}
 
 
@@ -18,7 +18,7 @@
 minlength="5" maxlength="255" required
 type="text" name="name"
 placeholder="Your Name"
-value="{{user.name}}"
+value="{{customer.name}}"
 >
 </div>
 </div>
@@ -32,7 +32,7 @@ value="{{user.name}}"
 <input class="input"
 required
 type="email"
-value="{{user.email}}"
+value="{{customer.email}}"
 placeholder="Your Email"
 name="email" >
 </div>
@@ -48,7 +48,7 @@ name="email" >
   <input class="input"
   required
   type="text"
-  value="{{user.avatar}}"
+  value="{{customer.avatar}}"
   placeholder="Your Avatar"
   name="avatar" >
   </div>
@@ -68,7 +68,7 @@ name="email" >
   value="{{flashMessages.get('bio') || ''}}"
   placeholder="Your Bio"
   name="bio" >
-  {{user.bio}}
+  {{customer.bio}}
   </textarea>
   </div>
   </div>
@@ -80,7 +80,7 @@ name="email" >
 
 
 <input class="input"
-value="{{user.dateOfBirth}}"
+value="{{customer.dateOfBirth}}"
 type="date" name="dateOfBirth">
 </div>
 </div>
@@ -90,8 +90,8 @@ type="date" name="dateOfBirth">
 <label class="label">Gender</label>
 <div class="select">
   <select  name="gender">
-    <option {{user.gender == "Male" && 'selected' }}>Male</option>
-    <option {{user.gender == "Female" && 'selected' }}>Female</option>
+    <option {{customer.gender == "Male" && 'selected' }}>Male</option>
+    <option {{customer.gender == "Female" && 'selected' }}>Female</option>
   </select>
 </div>
 </div>

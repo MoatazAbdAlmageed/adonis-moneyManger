@@ -1,7 +1,8 @@
-<a class="button is-light" href="{{route('addUser')}}">
+<a class="button is-light" href="{{route('addCustomer')}}">
   Add Customer
    </a>
 
+   @if (customers.length)
 <table class="table table is-striped">
   <thead>
     <tr>
@@ -14,16 +15,16 @@
   </thead>
   <tbody>
 
-    @each(user in users)
+    @each(customer in customers)
 
       <tr>
-        <th><a href="/{{ user.id }}">{{ user.name }}</a> </th>
-        <th>{{ user.dateOfBirth }} </th>
-        <th>{{ user.gender }} </th>
-        <th>{{ user.email }} </th>
+        <th><a href="/{{ customer.id }}">{{ customer.name }}</a> </th>
+        <th>{{ customer.dateOfBirth }} </th>
+        <th>{{ customer.gender }} </th>
+        <th>{{ customer.email }} </th>
         <th>
 
-          <form method="post" action="{{`/${user.id}/?_method=delete`}}">
+          <form method="post" action="{{`/${customer.id}/?_method=delete`}}">
             {{csrfField()}}
 
         <input class="button is-danger"    type="submit" value="Delete">
@@ -32,17 +33,21 @@
           </form>
         </th>
       </tr>
-      @else
-      <p>No Customers!!</p>
+
     @endeach
 
   </tbody>
 </table>
 
 
-
-@each(anchor in users.getUrlsForRange(1, users.lastPage))
+@each(anchor in customers.getUrlsForRange(1, customers.lastPage))
 <a href="{{ anchor.url }}">
   {{ anchor.page }}
 </a>
 @endeach
+
+@else
+
+<p>No Customers!</p>
+
+@endif
