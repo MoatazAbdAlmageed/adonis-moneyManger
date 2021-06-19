@@ -1,0 +1,77 @@
+<h1>Add New Bookable</h1>
+
+<form method="post" action="/bookables">
+  {{csrfField()}}
+
+
+<div class="field">
+  <label class="label">Title</label>
+
+  @if(flashMessages.has('errors.title'))
+  <p class="help is-danger"> {{flashMessages.get('errors.title')}} </p>
+  @endif
+  <input class="input"
+  minlength="5" maxlength="255" required
+  type="text" name="title"
+  placeholder="Your Name"
+  value="{{flashMessages.get('title') || ''}}"
+  >
+  </div>
+  </div>
+
+
+  <div class="control">
+    <div class="field">
+    <label class="label">Description</label>
+    @if(flashMessages.has('errors.details'))
+    <p class="help is-danger"> {{flashMessages.get('errors.description')}} </p>
+    @endif
+
+    <textarea class="textarea"
+    required
+    type="text"
+    value="{{flashMessages.get('description') || ''}}"
+    placeholder="Bookable Details"
+    name="description" >
+    </textarea>
+    </div>
+    </div>
+
+
+
+<div class="control">
+<div class="field">
+<label class="label">Quantity</label>
+@if(flashMessages.has('errors.quantity'))
+<p class="help is-danger"> {{flashMessages.get('errors.quantity')}} </p>
+@endif
+<input class="input"
+required
+type="number" step="0.01"
+value="{{flashMessages.get('quantity') || ''}}"
+placeholder="Bookable Quantity"
+name="quantity" >
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Price</label>
+@if(flashMessages.has('errors.price'))
+<p class="help is-danger"> {{flashMessages.get('errors.price')}} </p>
+@endif
+<input class="input"
+required
+type="number" step="0.01"
+value="{{flashMessages.get('price') || ''}}"
+placeholder="Bookable Price"
+name="price" >
+</div>
+</div>
+
+
+
+<div class="control">
+<input class="button is-black"   type="submit" value="Add bookable">
+</div>
+</form>

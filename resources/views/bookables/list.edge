@@ -1,0 +1,44 @@
+<a class="button is-light" href="{{route('addBookable')}}">
+  Add Bookable
+   </a>
+
+   @if (bookables.length)
+<table class="table table is-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @each(bookable in bookables)
+
+      <tr>
+        <th><a href="/bookables/{{ bookable.id }}">{{ bookable.title }}</a> </th>
+        <th>{{ bookable.description }}</th> </th>
+        <th>{{ bookable.quantity }}</th> </th>
+        <th>{{ bookable.price }} </th>
+        <th>
+          <form method="post" action="{{`/bookables/${bookable.id}/?_method=delete`}}">
+            {{csrfField()}}
+        <input class="button is-danger"    type="submit" value="Delete">
+          </form>
+        </th>
+      </tr>
+    @endeach
+  </tbody>
+</table>
+
+
+@each(anchor in bookables.getUrlsForRange(1, bookables.lastPage))
+<a href="/bookables{{ anchor.url }}">
+  {{ anchor.page }}
+</a>
+@endeach
+@else
+<p>No bookables!</p>
+@endif
