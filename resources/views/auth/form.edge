@@ -1,0 +1,73 @@
+<h1>Register</h1>
+
+<form method="post" action="/register">
+  {{csrfField()}}
+
+<div class="control">
+
+
+<div class="field">
+<label class="label">Name</label>
+
+@if(flashMessages.has('errors.name'))
+<p class="help is-danger"> {{flashMessages.get('errors.name')}} </p>
+@endif
+<input class="input"
+minlength="5" maxlength="255" required
+type="text" name="name"
+placeholder="Your Name"
+value="{{flashMessages.get('name') || ''}}"
+>
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Email</label>
+@if(flashMessages.has('errors.email'))
+<p class="help is-danger"> {{flashMessages.get('errors.email')}} </p>
+@endif
+<input class="input"
+required
+type="email"
+value="{{flashMessages.get('email') || ''}}"
+placeholder="Your Email"
+name="email" >
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Password</label>
+@if(flashMessages.has('errors.password'))
+<p class="help is-danger"> {{flashMessages.get('errors.password')}} </p>
+@endif
+<input class="input"
+required
+type="password"
+value="{{flashMessages.get('password') || ''}}"
+placeholder="Your password"
+name="password" >
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Password Confirmation</label>
+@if(flashMessages.has('errors.password_confirmation'))
+<p class="help is-danger"> {{flashMessages.get('errors.password_confirmation')}} </p>
+@endif
+<input class="input"
+required
+type="password"
+value="{{flashMessages.get('password_confirmation') || ''}}"
+placeholder="Your password_confirmation"
+name="password_confirmation" >
+</div>
+</div>
+
+
+<div class="control">
+<input class="button is-black"   type="submit" value="Register">
+</div>
+</form>

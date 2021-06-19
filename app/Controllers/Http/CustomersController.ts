@@ -1,24 +1,24 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { schema, rules } from "@ioc:Adonis/Core/Validator";
 import Database from "@ioc:Adonis/Lucid/Database";
-import User from "App/Models/User";
+import Customer from "App/Models/Customer";
 
-export default class UsersController {
+export default class CustomersController {
   public async index({ view, request }: HttpContextContract) {
     const limit = 5;
     const page = request.input("page", 1);
-    const users = await Database.from("users")
+    const customers = await Database.from("customers")
       .select("*")
       .orderBy("id", "desc") // 👈 get latest first
       .paginate(page, limit); // 👈 paginate using page numbers
-    // return users;
-    return view.render("index", { users });
+    // return customers;
+    return view.render("index", { customers });
   }
 
   public async show(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
-    const user = await User.find(params.id);
-    return view.render("edit", { user });
+    const customer = await Customer.find(params.id);
+    return view.render("edit", { customer });
   }
   public async add(httpContextContract: HttpContextContract) {
     const { view } = httpContextContract;
@@ -49,7 +49,7 @@ export default class UsersController {
       },
     });
     const { name, email, gender } = validationData;
-    User.create({
+    Customer.create({
       name,
       email,
       gender,
@@ -87,20 +87,20 @@ export default class UsersController {
       },
     });
     const { name, email, gender } = validationData;
-    const user = await User.findOrFail(params.id);
-    user.name = name;
-    user.email = email;
-    user.gender = gender;
-    user.avatar = request.input("avatar");
-    user.bio = request.input("bio");
+    const customer = await Customer.findOrFail(params.id);
+    customer.name = name;
+    customer.email = email;
+    customer.gender = gender;
+    customer.avatar = request.input("avatar");
+    customer.bio = request.input("bio");
     // TODO:save dateOfBirth
-    user.save();
+    customer.save();
     session.flash("notification", "Customer Updated!");
     response.redirect("/");
   }
   public async destroy({ response, session, params }: HttpContextContract) {
-    const user = await User.findOrFail(params.id);
-    user.delete();
+    const customer = await Customer.findOrFail(params.id);
+    customer.delete();
     session.flash("notification", "Customer Deleted!");
     response.redirect("/");
   }
