@@ -38,7 +38,7 @@ export default class AuthController {
     const user = await User.create(validatedData);
     await auth.login(user);
     session.flash("notification", "User Registered!");
-    response.redirect("/customers");
+    response.redirect("/");
   }
 
   public async showLogin({ view }: HttpContextContract) {
