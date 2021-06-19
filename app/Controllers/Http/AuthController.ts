@@ -54,16 +54,15 @@ export default class AuthController {
     const { email, password } = request.all();
     try {
       await auth.attempt(email, password);
-      session.flash("notification", "User Registered!");
-      response.redirect("/customers");
+      session.flash("notification", "Welcome Back!");
+      response.redirect("/");
     } catch (error) {
-      // return error;
       session.flash("notification", "User not found!");
       response.redirect("back");
     }
   }
   public async logout({ auth, response }: HttpContextContract) {
     auth.logout();
-    response.redirect("/customers");
+    response.redirect("/");
   }
 }

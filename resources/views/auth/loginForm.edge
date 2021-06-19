@@ -7,16 +7,16 @@
 
 
 <div class="field">
-<label class="label">Name</label>
+<label class="label">Email</label>
 
-@if(flashMessages.has('errors.name'))
-<p class="help is-danger"> {{flashMessages.get('errors.name')}} </p>
+@if(flashMessages.has('errors.email'))
+<p class="help is-danger"> {{flashMessages.get('errors.email')}} </p>
 @endif
 <input class="input"
 minlength="5" maxlength="255" required
-type="text" name="name"
-placeholder="Your Name"
-value="{{flashMessages.get('name') || ''}}"
+type="email" name="email"
+placeholder="Your email"
+value="{{flashMessages.get('email') || ''}}"
 >
 </div>
 </div>

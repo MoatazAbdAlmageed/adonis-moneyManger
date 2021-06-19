@@ -18,13 +18,13 @@
     @each(customer in customers)
 
       <tr>
-        <th><a href="/{{ customer.id }}">{{ customer.name }}</a> </th>
+        <th><a href="/customers/{{ customer.id }}">{{ customer.name }}</a> </th>
         <th>{{ customer.dateOfBirth }} </th>
         <th>{{ customer.gender }} </th>
         <th>{{ customer.email }} </th>
         <th>
 
-          <form method="post" action="{{`/${customer.id}/?_method=delete`}}">
+          <form method="post" action="{{`/customers/${customer.id}/?_method=delete`}}">
             {{csrfField()}}
 
         <input class="button is-danger"    type="submit" value="Delete">
