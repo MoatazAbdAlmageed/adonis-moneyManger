@@ -34,27 +34,31 @@ export default class CustomersController {
       gender: schema.string(),
     });
 
-    const validationData = await request.validate({
-      schema: validationSchema,
-      messages: {
-        "name.required": "Name Is required",
-        "name.maxLength": "Name maxLength is 255",
-        "name.minLength": "Name minLength is 5",
-        "email.required": "Email Is required",
-      },
-    });
-    const { name, email, gender } = validationData;
-    Customer.create({
-      name,
-      email,
-      gender,
-      avatar: request.input("avatar"),
-      bio: request.input("bio"),
-      // TODO:save dateOfBirth
-      // dateOfBirth,
-    });
-    session.flash("notification", "Customer Created!");
-    response.redirect("/customers");
+    try {
+      const validationData = await request.validate({
+        schema: validationSchema,
+        messages: {
+          "name.required": "Name Is required",
+          "name.maxLength": "Name maxLength is 255",
+          "name.minLength": "Name minLength is 5",
+          "email.required": "Email Is required",
+        },
+      });
+      const { name, email, gender } = validationData;
+      Customer.create({
+        name,
+        email,
+        gender,
+        avatar: request.input("avatar"),
+        bio: request.input("bio"),
+        // TODO:save dateOfBirth
+        // dateOfBirth,
+      });
+      session.flash("notification", "Customer Created!");
+      response.redirect("/customers");
+    } catch (error) {
+      return error;
+    }
   }
 
   public async update({

@@ -1,102 +1,93 @@
-<h1>Edit Customer</h1>
+<h1>Edit Reservation</h1>
 
-<form method="post" action="{{`/customers/${customer.id}/?_method=patch`}}">
+<form method="post" action="{{`/reservations/${reservation.id}/?_method=patch`}}">
   {{csrfField()}}
 
+  <div class="control">
+    <label class="label">User</label>
+    <div class="select">
+      <select name="user_id">
+        @each(user in users)
+        <option   {{reservation.user_id == user.id && 'selected'}}   value="{{user.id}}">{{user.name}}
+        @endeach
+      </select>
+    </div>
+    </div>
+
+  <div class="control">
+    <label class="label">Customer</label>
+    <div class="select">
+      <select name="customer_id">
+        @each(customer in customers)
+        <option   {{reservation.customer_id == customer.id && 'selected'}}   value="{{customer.id}}">{{customer.name}}
+        @endeach
+      </select>
+    </div>
+    </div>
+
+  <div class="control">
+    <label class="label">Bookable</label>
+    <div class="select">
+      <select name="bookable_id">
+        @each(bookable in bookables)
+        <option   {{reservation.bookable_id == bookable.id && 'selected'}}   value="{{bookable.id}}">{{bookable.title}}
+        @endeach
+      </select>
+    </div>
+    </div>
 
 
 <div class="control">
-
-
 <div class="field">
-<label class="label">Name</label>
-
-@if(flashMessages.has('errors.name'))
-<p class="help is-danger"> {{flashMessages.get('errors.name')}} </p>
-@endif
-<input class="input"
-minlength="5" maxlength="255" required
-type="text" name="name"
-placeholder="Your Name"
-value="{{customer.name}}"
->
-</div>
-</div>
-
-<div class="control">
-<div class="field">
-<label class="label">Email</label>
-@if(flashMessages.has('errors.email'))
-<p class="help is-danger"> {{flashMessages.get('errors.email')}} </p>
+<label class="label">Quantity</label>
+@if(flashMessages.has('errors.quantity'))
+<p class="help is-danger"> {{flashMessages.get('errors.quantity')}} </p>
 @endif
 <input class="input"
 required
-type="email"
-value="{{customer.email}}"
-placeholder="Your Email"
-name="email" >
+type="number" step="0.01"
+value="{{reservation.quantity}}"
+placeholder="Transaction Quantity"
+name="quantity" >
 </div>
 </div>
+<div class="control">
+<div class="field">
+<label class="label">Price</label>
+@if(flashMessages.has('errors.price'))
+<p class="help is-danger"> {{flashMessages.get('errors.price')}} </p>
+@endif
+<input class="input"
+required
+type="number" step="0.01"
+value="{{reservation.price}}"
+placeholder="Transaction Price"
+name="price" >
+</div>
+</div>
+
+
 
 
 <div class="control">
   <div class="field">
-  <label class="label">Avatar</label>
-  @if(flashMessages.has('errors.avatar'))
-  <p class="help is-danger"> {{flashMessages.get('errors.avatar')}} </p>
-  @endif
-  <input class="input"
-  required
-  type="text"
-  value="{{customer.avatar}}"
-  placeholder="Your Avatar"
-  name="avatar" >
-  </div>
-  </div>
-
-
-  <div class="control">
-  <div class="field">
-  <label class="label">Bio</label>
-  @if(flashMessages.has('errors.bio'))
-  <p class="help is-danger"> {{flashMessages.get('errors.bio')}} </p>
+  <label class="label">Notes</label>
+  @if(flashMessages.has('errors.notes'))
+  <p class="help is-danger"> {{flashMessages.get('errors.notes')}} </p>
   @endif
 
   <textarea class="textarea"
   required
   type="text"
-  value="{{flashMessages.get('bio') || ''}}"
-  placeholder="Your Bio"
-  name="bio" >
-  {{customer.bio}}
-  </textarea>
+  value="{{flashMessages.get('notes') || ''}}"
+  placeholder="Notes"
+  name="notes" >{{reservation.notes}}</textarea>
   </div>
   </div>
 
 
-<div class="control">
-<div class="field">
-<label class="label">Date Of Birth</label>
-
-
-<input class="input"
-value="{{customer.dateOfBirth}}"
-type="date" name="dateOfBirth">
-</div>
-</div>
-
 
 <div class="control">
-<label class="label">Gender</label>
-<div class="select">
-  <select  name="gender">
-    <option {{customer.gender == "Male" && 'selected' }}>Male</option>
-    <option {{customer.gender == "Female" && 'selected' }}>Female</option>
-  </select>
-</div>
-</div>
-
-<div class="control">
-<input class="button is-black"    type="submit" value="Update Customer">
+<input class="button is-black"   type="submit" value="Edit transaction">
 </div>
 </form>

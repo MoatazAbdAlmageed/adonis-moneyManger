@@ -27,21 +27,25 @@ export default class AuthController {
       ]),
     });
 
-    const validatedData = await request.validate({
-      schema: validationSchema,
-      messages: {
-        "name.required": "Name Is required",
-        "password.required": "Password Is required",
-        "name.maxLength": "Name maxLength is 255",
-        "name.minLength": "Name minLength is 5",
-        "email.required": "Email Is required",
-      },
-    });
+    try {
+      const validatedData = await request.validate({
+        schema: validationSchema,
+        messages: {
+          "name.required": "Name Is required",
+          "password.required": "Password Is required",
+          "name.maxLength": "Name maxLength is 255",
+          "name.minLength": "Name minLength is 5",
+          "email.required": "Email Is required",
+        },
+      });
 
-    const user = await User.create(validatedData);
-    await auth.login(user);
-    session.flash("notification", "User Registered!");
-    response.redirect("/");
+      const user = await User.create(validatedData);
+      await auth.login(user);
+      session.flash("notification", "User Registered!");
+      response.redirect("/");
+    } catch (error) {
+      return error;
+    }
   }
 
   public async showLogin({ view }: HttpContextContract) {

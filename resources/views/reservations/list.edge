@@ -1,30 +1,34 @@
-<a class="button is-light" href="{{route('addCustomer')}}">
-  Add Customer
+<a class="button is-light" href="{{route('addReservation')}}">
+  Add Reservation
    </a>
 
-   @if (customers.length)
+   @if (reservations.length)
 <table class="table table is-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Date Of Birth</th>
-      <th>Gender</th>
-      <th>Email</th>
+      <th>User</th>
+      <th>Customer</th>
+      <th>Bookable</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Notes</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
 
-    @each(customer in customers)
+    @each(reservation in reservations)
 
       <tr>
-        <th><a href="/customers/{{ customer.id }}">{{ customer.name }}</a> </th>
-        <th>{{ customer.dateOfBirth }} </th>
-        <th>{{ customer.gender }} </th>
-        <th>{{ customer.email }} </th>
+        <th><a href="/reservations/{{ reservation.id }}">{{ reservation.user_id }}</a> </th>
+        <th>{{ reservation.customer_id }} </th>
+        <th>{{ reservation.bookable_id }} </th>
+        <th>{{ reservation.quantity }} </th>
+        <th>{{ reservation.price }} </th>
+        <th>{{ reservation.notes }} </th>
         <th>
 
-          <form method="post" action="{{`/customers/${customer.id}/?_method=delete`}}">
+          <form method="post" action="{{`/reservations/${reservation.id}/?_method=delete`}}">
             {{csrfField()}}
 
         <input class="button is-danger"    type="submit" value="Delete">
@@ -40,7 +44,7 @@
 </table>
 
 
-@each(anchor in customers.getUrlsForRange(1, customers.lastPage))
+@each(anchor in reservations.getUrlsForRange(1, reservations.lastPage))
 <a href="{{ anchor.url }}">
   {{ anchor.page }}
 </a>
@@ -48,6 +52,6 @@
 
 @else
 
-<p>No Customers!</p>
+<p>No Reservations!</p>
 
 @endif

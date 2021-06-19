@@ -39,19 +39,23 @@ export default class TransactionsController {
       details: schema.string(),
     });
 
-    const validationData = await request.validate({
-      schema: validationSchema,
-      messages: {
-        "user_id.required": "user_id Is required",
-        "customer_id.required": "customer_id Is required",
-        "amount.required": "amount Is required",
-        "type.required": "type Is required",
-        "details.required": "details Is required",
-      },
-    });
-    Transaction.create(validationData);
-    session.flash("notification", "Transaction Created!");
-    response.redirect("/transactions");
+    try {
+      const validationData = await request.validate({
+        schema: validationSchema,
+        messages: {
+          "user_id.required": "user_id Is required",
+          "customer_id.required": "customer_id Is required",
+          "amount.required": "amount Is required",
+          "type.required": "type Is required",
+          "details.required": "details Is required",
+        },
+      });
+      Transaction.create(validationData);
+      session.flash("notification", "Transaction Created!");
+      response.redirect("/transactions");
+    } catch (error) {
+      return error;
+    }
   }
 
   public async update({
