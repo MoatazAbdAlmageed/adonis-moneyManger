@@ -17,6 +17,9 @@
         @if(flashMessages.has('notification'))
 <p class="notification is-success"> {{flashMessages.get('notification')}} </p>
 @endif
+        @if(flashMessages.has('error'))
+<p class="notification is-danger"> {{flashMessages.get('error')}} </p>
+@endif
 
     @!section('content')
     </div>

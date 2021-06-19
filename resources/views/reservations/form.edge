@@ -1,0 +1,97 @@
+<h1>Add New Customer</h1>
+
+<form method="post" action="/customers">
+  {{csrfField()}}
+
+<div class="control">
+
+
+<div class="field">
+<label class="label">Name</label>
+
+@if(flashMessages.has('errors.name'))
+<p class="help is-danger"> {{flashMessages.get('errors.name')}} </p>
+@endif
+<input class="input"
+minlength="5" maxlength="255" required
+type="text" name="name"
+placeholder="Your Name"
+value="{{flashMessages.get('name') || ''}}"
+>
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Email</label>
+@if(flashMessages.has('errors.email'))
+<p class="help is-danger"> {{flashMessages.get('errors.email')}} </p>
+@endif
+<input class="input"
+required
+type="email"
+value="{{flashMessages.get('email') || ''}}"
+placeholder="Your Email"
+name="email" >
+</div>
+</div>
+
+
+<div class="control">
+  <div class="field">
+  <label class="label">Avatar</label>
+  @if(flashMessages.has('errors.avatar'))
+  <p class="help is-danger"> {{flashMessages.get('errors.avatar')}} </p>
+  @endif
+  <input class="input"
+  required
+  type="text"
+  value="{{flashMessages.get('avatar') || ''}}"
+  placeholder="Your Avatar"
+  name="avatar" >
+  </div>
+  </div>
+
+
+  <div class="control">
+  <div class="field">
+  <label class="label">Bio</label>
+  @if(flashMessages.has('errors.bio'))
+  <p class="help is-danger"> {{flashMessages.get('errors.bio')}} </p>
+  @endif
+
+  <textarea class="textarea"
+  required
+  type="text"
+  value="{{flashMessages.get('bio') || ''}}"
+  placeholder="Your Bio"
+  name="bio" >
+  </textarea>
+  </div>
+  </div>
+
+
+<div class="control">
+<div class="field">
+<label class="label">Date Of Birth</label>
+
+
+<input class="input"   type="date" name="dateOfBirth">
+</div>
+</div>
+
+
+<div class="control">
+<label class="label">Gender</label>
+<div class="select">
+  <select name="gender">
+    <option>Male</option>
+    <option>Female</option>
+  </select>
+</div>
+</div>
+
+<div class="control">
+<input class="button is-black"   type="submit" value="Add Customer">
+</div>
+</form>

@@ -8,10 +8,11 @@ export default class Customers extends BaseSchema {
       table.increments("id").primary();
       table.string("name").notNullable();
       table.string("email").notNullable();
-      table.text("bio");
+      table.text("bio").nullable();
       table.string("avatar");
       table.enum("gender", ["Male", "Female"]);
       table.date("dateOfBirth");
+      table.boolean("is_deleted").notNullable().defaultTo(true);
       table.timestamps(1);
     });
   }

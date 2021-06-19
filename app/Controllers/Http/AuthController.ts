@@ -2,6 +2,9 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { schema, rules } from "@ioc:Adonis/Core/Validator";
 import User from "App/Models/User";
 export default class AuthController {
+  public async dashboard({ view }: HttpContextContract) {
+    return view.render("dashboard");
+  }
   public async showRegister({ view }: HttpContextContract) {
     return view.render("auth/register");
   }
@@ -53,11 +56,11 @@ export default class AuthController {
   }: HttpContextContract) {
     const { email, password } = request.all();
     try {
-      await auth.attempt(email, password);
-      session.flash("notification", "Welcome Back!");
+      const user = await auth.attempt(email, password);
+      session.flash("notification", `Welcome Back ${user.name}!`);
       response.redirect("/");
     } catch (error) {
-      session.flash("notification", "User not found!");
+      session.flash("error", "We couldn't verify your credentials!");
       response.redirect("back");
     }
   }

@@ -1,0 +1,46 @@
+<a class="button is-light" href="{{route('addTransaction')}}">
+  Add Transaction
+   </a>
+
+   @if (transactions.length)
+<table class="table table is-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Customer</th>
+      <th>Amount</th>
+      <th>Type</th>
+      <th>Details</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @each(transaction in transactions)
+
+      <tr>
+        <th><a href="/transactions/{{ transaction.id }}">{{ transaction.user_id }}</a> </th>
+        <th>{{ transaction.customer_id }} </th>
+        <th>{{ transaction.amount }} </th>
+        <th>{{ transaction.type }} </th>
+        <th>{{ transaction.details }} </th>
+        <th>
+          <form method="post" action="{{`/transactions/${transaction.id}/?_method=delete`}}">
+            {{csrfField()}}
+        <input class="button is-danger"    type="submit" value="Delete">
+          </form>
+        </th>
+      </tr>
+    @endeach
+  </tbody>
+</table>
+
+
+@each(anchor in transactions.getUrlsForRange(1, transactions.lastPage))
+<a href="/transactions{{ anchor.url }}">
+  {{ anchor.page }}
+</a>
+@endeach
+@else
+<p>No transactions!</p>
+@endif

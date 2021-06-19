@@ -1,28 +1,23 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { schema, rules } from "@ioc:Adonis/Core/Validator";
-import Database from "@ioc:Adonis/Lucid/Database";
 import Customer from "App/Models/Customer";
 
 export default class CustomersController {
   public async index({ view, request }: HttpContextContract) {
     const limit = 5;
     const page = request.input("page", 1);
-    const customers = await Database.from("customers")
-      .select("*")
-      .orderBy("id", "desc") // 👈 get latest first
-      .paginate(page, limit); // 👈 paginate using page numbers
-    // return customers;
-    return view.render("index", { customers });
+    const customers = await Customer.query().paginate(page, limit);
+    return view.render("customers.index", { customers });
   }
 
   public async show(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const customer = await Customer.find(params.id);
-    return view.render("edit", { customer });
+    return view.render("customers.edit", { customer });
   }
   public async add(httpContextContract: HttpContextContract) {
     const { view } = httpContextContract;
-    return view.render("add");
+    return view.render("customers.add");
   }
 
   public async store({ request, response, session }: HttpContextContract) {
@@ -59,7 +54,7 @@ export default class CustomersController {
       // dateOfBirth,
     });
     session.flash("notification", "Customer Created!");
-    response.redirect("/");
+    response.redirect("/customers");
   }
 
   public async update({
@@ -96,12 +91,12 @@ export default class CustomersController {
     // TODO:save dateOfBirth
     customer.save();
     session.flash("notification", "Customer Updated!");
-    response.redirect("/");
+    response.redirect("/customers");
   }
   public async destroy({ response, session, params }: HttpContextContract) {
     const customer = await Customer.findOrFail(params.id);
     customer.delete();
     session.flash("notification", "Customer Deleted!");
-    response.redirect("/");
+    response.redirect("/customers");
   }
 }

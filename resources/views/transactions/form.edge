@@ -1,0 +1,80 @@
+<h1>Add New Transaction</h1>
+
+<form method="post" action="/transactions">
+  {{csrfField()}}
+
+<div class="control">
+
+
+  <div class="control">
+    <label class="label">User</label>
+    <div class="select">
+      <select name="user_id">
+        @each(user in users)
+        <option value="{{user.id}}">{{user.name}}</option>
+        @endeach
+      </select>
+    </div>
+    </div>
+  <div class="control">
+    <label class="label">Customer</label>
+    <div class="select">
+      <select name="customer_id">
+        @each(customer in customers)
+        <option value="{{customer.id}}">{{customer.name}}</option>
+        @endeach
+      </select>
+    </div>
+    </div>
+
+
+<div class="control">
+<div class="field">
+<label class="label">Amount</label>
+@if(flashMessages.has('errors.amount'))
+<p class="help is-danger"> {{flashMessages.get('errors.amount')}} </p>
+@endif
+<input class="input"
+required
+type="number" step="0.01"
+value="{{flashMessages.get('amount') || ''}}"
+placeholder="Transaction Amount"
+name="amount" >
+</div>
+</div>
+
+
+<div class="control">
+  <label class="label">Type</label>
+  <div class="select">
+    <select name="type">
+      <option>Expense</option>
+      <option>Revenue</option>
+    </select>
+  </div>
+  </div>
+
+
+
+  <div class="control">
+  <div class="field">
+  <label class="label">Details</label>
+  @if(flashMessages.has('errors.details'))
+  <p class="help is-danger"> {{flashMessages.get('errors.details')}} </p>
+  @endif
+
+  <textarea class="textarea"
+  required
+  type="text"
+  value="{{flashMessages.get('details') || ''}}"
+  placeholder="Transaction Details"
+  name="details" >
+  </textarea>
+  </div>
+  </div>
+
+
+<div class="control">
+<input class="button is-black"   type="submit" value="Add transaction">
+</div>
+</form>
