@@ -10,7 +10,7 @@ export default class UsersSchema extends BaseSchema {
       table.string("email", 255).notNullable();
       table.string("password", 180).notNullable();
       table.string("remember_me_token").nullable();
-      table.boolean("is_deleted").notNullable().defaultTo(true);
+      table.boolean("is_deleted").notNullable().defaultTo(false);
       table.timestamps(1);
     });
   }

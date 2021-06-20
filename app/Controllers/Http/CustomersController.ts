@@ -10,7 +10,7 @@ export default class CustomersController {
     return view.render("customers.index", { customers });
   }
 
-  public async show(httpContextContract: HttpContextContract) {
+  public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const customer = await Customer.find(params.id);
     return view.render("customers.edit", { customer });

@@ -9,21 +9,11 @@
 
 
   <div class="control">
-    <label class="label">User</label>
-    <div class="select">
-      <select name="user_id">
-        @each(user in users)
-        <option   {{transaction.user_id == user.id && 'selected'}}   value="{{user.id}}">{{user.name}}</option>
-        @endeach
-      </select>
-    </div>
-    </div>
-  <div class="control">
     <label class="label">Customer</label>
     <div class="select">
-      <select name="customer_id">
+      <select name="customerId">
         @each(customer in customers)
-        <option   {{transaction.customer_id == customer.id && 'selected'}}   value="{{customer.id}}">{{customer.name}}</option>
+        <option   {{transaction.customerId == customer.id && 'selected'}}   value="{{customer.id}}">{{customer.name}}</option>
 
         @endeach
       </select>

@@ -1,18 +1,20 @@
 import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, belongsTo, BelongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import User from "./User";
+import Customer from "./Customer";
 
 export default class Reservation extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
   @column()
-  public user_id: number;
+  public userId: number;
 
   @column()
-  public customer_id: number;
+  public customerId: number;
 
   @column()
-  public bookable_id: number;
+  public bookableId: number;
 
   @column()
   public quantity: number;
@@ -30,4 +32,13 @@ export default class Reservation extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  /**
+   * Relationships
+   */
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>;
+
+  @belongsTo(() => Customer)
+  public customer: BelongsTo<typeof Customer>;
 }

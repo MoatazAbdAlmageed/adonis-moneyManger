@@ -1,5 +1,7 @@
 import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, column, hasMany, HasMany } from "@ioc:Adonis/Lucid/Orm";
+import Transaction from "./Transaction";
+import Reservation from "./Reservation";
 
 export default class Customer extends BaseModel {
   @column({ isPrimary: true })
@@ -31,4 +33,13 @@ export default class Customer extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  /**
+   * Relationships
+   */
+  @hasMany(() => Transaction)
+  public transactions: HasMany<typeof Transaction>;
+
+  @hasMany(() => Reservation)
+  public reservations: HasMany<typeof Reservation>;
 }

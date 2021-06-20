@@ -1,15 +1,17 @@
 import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import User from "./User";
+import Customer from "./Customer";
 
 export default class Transaction extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
   @column()
-  public user_id: number;
+  public userId: number;
 
   @column()
-  public customer_id: number;
+  public customerId: number;
 
   @column()
   public amount: number;
@@ -29,4 +31,13 @@ export default class Transaction extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  /**
+   * Relationships
+   */
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>;
+
+  @belongsTo(() => Customer)
+  public customer: BelongsTo<typeof User>;
 }

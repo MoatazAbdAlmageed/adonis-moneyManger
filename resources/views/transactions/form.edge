@@ -5,20 +5,12 @@
 
 
 
-  <div class="control">
-    <label class="label">User</label>
-    <div class="select">
-      <select name="user_id">
-        @each(user in users)
-        <option value="{{user.id}}">{{user.name}}</option>
-        @endeach
-      </select>
-    </div>
-    </div>
+
   <div class="control">
     <label class="label">Customer</label>
     <div class="select">
-      <select name="customer_id">
+      <select name="customerId">
+        <option selected>--- Select ---</option>
         @each(customer in customers)
         <option value="{{customer.id}}">{{customer.name}}</option>
         @endeach

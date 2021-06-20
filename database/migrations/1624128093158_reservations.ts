@@ -12,7 +12,7 @@ export default class Reservations extends BaseSchema {
       table.float("quantity");
       table.float("price");
       table.text("notes").nullable();
-      table.boolean("is_deleted").notNullable().defaultTo(true);
+      table.boolean("is_deleted").notNullable().defaultTo(false);
       table.timestamps(1);
     });
   }

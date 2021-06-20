@@ -20,9 +20,9 @@
     @each(reservation in reservations)
 
       <tr>
-        <th><a href="/reservations/{{ reservation.id }}">{{ reservation.user_id }}</a> </th>
-        <th>{{ reservation.customer_id }} </th>
-        <th>{{ reservation.bookable_id }} </th>
+        <th><a href="/reservations/{{ reservation.id }}">{{ reservation.user.name }}</a> </th>
+        <th>{{ reservation.customer.name }} </th>
+        <th>{{ reservation.bookableId }} </th>
         <th>{{ reservation.quantity }} </th>
         <th>{{ reservation.price }} </th>
         <th>{{ reservation.notes }} </th>

@@ -3,23 +3,13 @@
 <form method="post" action="{{`/reservations/${reservation.id}/?_method=patch`}}">
   {{csrfField()}}
 
-  <div class="control">
-    <label class="label">User</label>
-    <div class="select">
-      <select name="user_id">
-        @each(user in users)
-        <option   {{reservation.user_id == user.id && 'selected'}}   value="{{user.id}}">{{user.name}}
-        @endeach
-      </select>
-    </div>
-    </div>
 
   <div class="control">
     <label class="label">Customer</label>
     <div class="select">
-      <select name="customer_id">
+      <select name="customerId">
         @each(customer in customers)
-        <option   {{reservation.customer_id == customer.id && 'selected'}}   value="{{customer.id}}">{{customer.name}}
+        <option   {{reservation.customerId == customer.id && 'selected'}}   value="{{customer.id}}">{{customer.name}}
         @endeach
       </select>
     </div>
@@ -28,9 +18,9 @@
   <div class="control">
     <label class="label">Bookable</label>
     <div class="select">
-      <select name="bookable_id">
+      <select name="bookableId">
         @each(bookable in bookables)
-        <option   {{reservation.bookable_id == bookable.id && 'selected'}}   value="{{bookable.id}}">{{bookable.title}}
+        <option   {{reservation.bookableId == bookable.id && 'selected'}}   value="{{bookable.id}}">{{bookable.title}}
         @endeach
       </select>
     </div>

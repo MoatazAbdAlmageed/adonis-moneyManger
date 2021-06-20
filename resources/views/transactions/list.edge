@@ -19,8 +19,8 @@
     @each(transaction in transactions)
 
       <tr>
-        <th><a href="/transactions/{{ transaction.id }}">{{ transaction.user_id }}</a> </th>
-        <th>{{ transaction.customer_id }} </th>
+        <th><a href="/transactions/{{ transaction.id }}">{{ transaction?.user?.name }}</a> </th>
+        <th>{{ transaction?.customer?.name }}</th>
         <th>{{ transaction.amount }} </th>
         <th>{{ transaction.type }} </th>
         <th>{{ transaction.details }} </th>

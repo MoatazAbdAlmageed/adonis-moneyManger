@@ -10,7 +10,7 @@ export default class Bookables extends BaseSchema {
       table.text("description");
       table.float("quantity");
       table.float("price");
-      table.boolean("is_deleted").notNullable().defaultTo(true);
+      table.boolean("is_deleted").notNullable().defaultTo(false);
       table.timestamps(1);
     });
   }

@@ -11,7 +11,7 @@ export default class Transactions extends BaseSchema {
       table.float("amount");
       table.enum("type", ["expense", "revenue"]);
       table.text("details").nullable();
-      table.boolean("is_deleted").notNullable().defaultTo(true);
+      table.boolean("is_deleted").notNullable().defaultTo(false);
       table.timestamps(1);
     });
   }

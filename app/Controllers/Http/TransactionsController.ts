@@ -8,10 +8,13 @@ export default class TransactionsController {
   public async index({ view, request }: HttpContextContract) {
     const limit = 5;
     const page = request.input("page", 1);
-    const transactions = await Transaction.query().paginate(page, limit);
+    const transactions = await Transaction.query()
+      .preload("user")
+      .preload("customer")
+      .paginate(page, limit);
     return view.render("transactions.index", { transactions });
   }
-  public async show(httpContextContract: HttpContextContract) {
+  public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const users = await User.all();
     const customers = await Customer.all();
@@ -25,15 +28,18 @@ export default class TransactionsController {
     return view.render("transactions.add", { users, customers });
   }
 
-  public async store({ request, response, session }: HttpContextContract) {
+  public async store({
+    request,
+    response,
+    session,
+    auth,
+  }: HttpContextContract) {
     /**
      *  TODO:DRY same code used in update!
      * try to refactor this !
      */
 
     const validationSchema = schema.create({
-      user_id: schema.number(),
-      customer_id: schema.number(),
       amount: schema.number(),
       type: schema.string(),
       details: schema.string(),
@@ -43,14 +49,15 @@ export default class TransactionsController {
       const validationData = await request.validate({
         schema: validationSchema,
         messages: {
-          "user_id.required": "user_id Is required",
-          "customer_id.required": "customer_id Is required",
           "amount.required": "amount Is required",
           "type.required": "type Is required",
           "details.required": "details Is required",
         },
       });
-      Transaction.create(validationData);
+      auth.user?.related("transactions").create({
+        ...validationData,
+        customerId: request.input("customerId"),
+      });
       session.flash("notification", "Transaction Created!");
       response.redirect("/transactions");
     } catch (error) {
@@ -65,8 +72,8 @@ export default class TransactionsController {
     params,
   }: HttpContextContract) {
     const validationSchema = schema.create({
-      user_id: schema.number(),
-      customer_id: schema.number(),
+      userId: schema.number(),
+      customerId: schema.number(),
       amount: schema.number(),
       type: schema.string(),
       details: schema.string(),
@@ -74,17 +81,18 @@ export default class TransactionsController {
     const validationData = await request.validate({
       schema: validationSchema,
       messages: {
-        "user_id.required": "user_id Is required",
-        "customer_id.required": "customer_id Is required",
+        "userId.required": "userId Is required",
+        "customerId.required": "customerId Is required",
         "amount.required": "amount Is required",
         "type.required": "type Is required",
         "details.required": "details Is required",
       },
     });
-    const { user_id, customer_id, amount, type, details } = validationData;
+    const { userId, customerId, amount, type, details } = validationData;
+    // TODO:update only related
     const transaction = await Transaction.findOrFail(params.id);
-    transaction.user_id = user_id;
-    transaction.customer_id = customer_id;
+    transaction.userId = userId;
+    transaction.customerId = customerId;
     transaction.amount = amount;
     transaction.type = type;
     transaction.details = details;

@@ -12,7 +12,7 @@ export default class Customers extends BaseSchema {
       table.string("avatar");
       table.enum("gender", ["Male", "Female"]);
       table.date("dateOfBirth");
-      table.boolean("is_deleted").notNullable().defaultTo(true);
+      table.boolean("is_deleted").notNullable().defaultTo(false);
       table.timestamps(1);
     });
   }

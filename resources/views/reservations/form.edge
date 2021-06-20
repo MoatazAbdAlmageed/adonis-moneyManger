@@ -6,22 +6,11 @@
 
 
 
-  <div class="control">
-    <label class="label">User</label>
-    <div class="select">
-      <select name="user_id">
-        @each(user in users)
-        <option value="{{user.id}}">{{user.name}}</option>
-        @endeach
-      </select>
-    </div>
-    </div>
-
 
   <div class="control">
     <label class="label">Customer</label>
     <div class="select">
-      <select name="customer_id">
+      <select name="customerId">
         @each(customer in customers)
         <option value="{{customer.id}}">{{customer.name}}</option>
         @endeach
@@ -32,7 +21,7 @@
   <div class="control">
     <label class="label">Bookable</label>
     <div class="select">
-      <select name="bookable_id">
+      <select name="bookableId">
         @each(bookable in bookables)
         <option value="{{bookable.id}}">{{bookable.title}}</option>
         @endeach
