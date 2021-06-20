@@ -1,0 +1,56 @@
+<a class="button is-light" href="{{route('addUser')}}">
+  Add user
+   </a>
+
+   @if (users.length)
+<table class="table table is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @each(user in users)
+
+      <tr>
+        <th><a href="/users/{{ user.id }}">{{ user.name }}</a> </th>
+        <th>{{ user.gender }} </th>
+        <th>{{ user.email }} </th>
+        <th>{{ user.phone }} </th>
+        <th>{{ user.address }} </th>
+
+        <th>
+
+          <form method="post" action="{{`/users/${user.id}/?_method=delete`}}">
+            {{csrfField()}}
+
+        <input class="button is-danger"    type="submit" value="Delete">
+
+
+          </form>
+        </th>
+      </tr>
+
+    @endeach
+
+  </tbody>
+</table>
+
+
+@each(anchor in users.getUrlsForRange(1, users.lastPage))
+<a href="/users{{ anchor.url }}">
+  {{ anchor.page }}
+</a>
+@endeach
+
+@else
+
+<p>No users!</p>
+
+@endif

@@ -7,9 +7,13 @@ export default class UsersSchema extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
       table.string("name", 255).notNullable();
+      table.string("phone", 255).notNullable();
+      table.text("bio").notNullable();
+      table.string("address", 255).notNullable();
       table.string("email", 255).notNullable();
       table.string("password", 180).notNullable();
       table.string("remember_me_token").nullable();
+      table.enum("gender", ["Male", "Female"]);
       table.boolean("is_deleted").notNullable().defaultTo(false);
       table.timestamps(1);
     });

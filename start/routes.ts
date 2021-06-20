@@ -47,6 +47,7 @@ Route.group(() => {
   Route.post("reservations/", "ReservationsController.store");
   Route.patch("reservations/:id", "ReservationsController.update");
   Route.delete("reservations/:id", "ReservationsController.destroy");
+
   /**
    * CustomersController
    */
@@ -56,4 +57,14 @@ Route.group(() => {
   Route.post("customers/", "CustomersController.store");
   Route.patch("customers/:id", "CustomersController.update");
   Route.delete("customers/:id", "CustomersController.destroy");
+
+  /**
+   * UsersController
+   */
+  Route.get("users", "UsersController.index").as("users");
+  Route.get("users/add", "UsersController.add").as("addUser");
+  Route.get("users/:id?", "UsersController.edit");
+  Route.post("users/", "UsersController.store");
+  Route.patch("users/:id", "UsersController.update");
+  Route.delete("users/:id", "UsersController.destroy");
 }).middleware("auth");

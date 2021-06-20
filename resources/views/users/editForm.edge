@@ -1,0 +1,110 @@
+<h1>Edit user</h1>
+
+<form method="post" action="{{`/users/${user.id}/?_method=patch`}}">
+  {{csrfField()}}
+
+
+
+<div class="control">
+
+
+<div class="field">
+<label class="label">Name</label>
+
+@if(flashMessages.has('errors.name'))
+<p class="help is-danger"> {{flashMessages.get('errors.name')}} </p>
+@endif
+<input class="input"
+minlength="5" maxlength="255" required
+type="text" name="name"
+placeholder="Your Name"
+value="{{user.name}}"
+>
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Phone</label>
+@if(flashMessages.has('errors.phone'))
+<p class="help is-danger"> {{flashMessages.get('errors.phone')}} </p>
+@endif
+<input class="input"
+required
+type="phone"
+value="{{user.phone}}"
+placeholder="Your Phone"
+name="phone" >
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Address</label>
+@if(flashMessages.has('errors.address'))
+<p class="help is-danger"> {{flashMessages.get('errors.address')}} </p>
+@endif
+<input class="input"
+required
+type="address"
+value="{{user.address}}"
+placeholder="Your Address"
+name="address" >
+</div>
+</div>
+
+<div class="control">
+<div class="field">
+<label class="label">Email</label>
+@if(flashMessages.has('errors.email'))
+<p class="help is-danger"> {{flashMessages.get('errors.email')}} </p>
+@endif
+<input class="input"
+required
+type="email"
+value="{{user.email}}"
+placeholder="Your Email"
+name="email" >
+</div>
+</div>
+
+
+
+
+  <div class="control">
+  <div class="field">
+  <label class="label">Bio</label>
+  @if(flashMessages.has('errors.bio'))
+  <p class="help is-danger"> {{flashMessages.get('errors.bio')}} </p>
+  @endif
+
+  <textarea class="textarea"
+  required
+  type="text"
+  value="{{flashMessages.get('bio') || ''}}"
+  placeholder="Your Bio"
+  name="bio" >
+  {{user.bio}}
+  </textarea>
+  </div>
+  </div>
+
+
+
+
+
+
+<div class="control">
+<label class="label">Gender</label>
+<div class="select">
+  <select  name="gender">
+    <option {{user.gender == "Male" && 'selected' }}>Male</option>
+    <option {{user.gender == "Female" && 'selected' }}>Female</option>
+  </select>
+</div>
+</div>
+
+<div class="control">
+<input class="button is-black"    type="submit" value="Update user">
+</div>
+</form>
