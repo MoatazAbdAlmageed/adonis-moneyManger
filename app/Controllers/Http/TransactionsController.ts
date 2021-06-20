@@ -70,9 +70,9 @@ export default class TransactionsController {
     response,
     session,
     params,
+    auth,
   }: HttpContextContract) {
     const validationSchema = schema.create({
-      userId: schema.number(),
       customerId: schema.number(),
       amount: schema.number(),
       type: schema.string(),
@@ -81,22 +81,19 @@ export default class TransactionsController {
     const validationData = await request.validate({
       schema: validationSchema,
       messages: {
-        "userId.required": "userId Is required",
         "customerId.required": "customerId Is required",
         "amount.required": "amount Is required",
         "type.required": "type Is required",
         "details.required": "details Is required",
       },
     });
-    const { userId, customerId, amount, type, details } = validationData;
+    const { customerId, amount, type, details } = validationData;
     // TODO:update only related
     const transaction = await Transaction.findOrFail(params.id);
-    transaction.userId = userId;
     transaction.customerId = customerId;
     transaction.amount = amount;
     transaction.type = type;
     transaction.details = details;
-    // TODO:save dateOfBirth
     transaction.save();
     session.flash("notification", "Transaction Updated!");
     response.redirect("/transactions");

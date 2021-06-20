@@ -8,8 +8,7 @@ export default class BookablesController {
   public async index({ view, request }: HttpContextContract) {
     const limit = 5;
     const page = request.input("page", 1);
-    const bookables = await Bookable.query()
-    .paginate(page, limit);
+    const bookables = await Bookable.query().paginate(page, limit);
     return view.render("bookables.index", { bookables });
   }
   public async edit(httpContextContract: HttpContextContract) {
@@ -87,7 +86,6 @@ export default class BookablesController {
     bookable.description = description;
     bookable.quantity = quantity;
     bookable.price = price;
-    // TODO:save dateOfBirth
     bookable.save();
     session.flash("notification", "Bookable Updated!");
     response.redirect("/bookables");

@@ -39,5 +39,5 @@ export default class Transaction extends BaseModel {
   public user: BelongsTo<typeof User>;
 
   @belongsTo(() => Customer)
-  public customer: BelongsTo<typeof User>;
+  public customer: BelongsTo<typeof Customer>;
 }

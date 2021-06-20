@@ -10,17 +10,17 @@ export default class Customer extends BaseModel {
   @column()
   public name: string;
 
-  @column.dateTime()
-  public dateOfBirth: DateTime;
-
   @column()
   public email: string;
 
   @column()
-  public gender: string;
+  public phone: string;
 
   @column()
-  public avatar: string;
+  public address: string;
+
+  @column()
+  public gender: string;
 
   @column()
   public bio: string;

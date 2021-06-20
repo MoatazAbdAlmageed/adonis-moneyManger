@@ -7,9 +7,10 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Date Of Birth</th>
       <th>Gender</th>
       <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -19,9 +20,11 @@
 
       <tr>
         <th><a href="/customers/{{ customer.id }}">{{ customer.name }}</a> </th>
-        <th>{{ customer.dateOfBirth }} </th>
         <th>{{ customer.gender }} </th>
         <th>{{ customer.email }} </th>
+        <th>{{ customer.phone }} </th>
+        <th>{{ customer.address }} </th>
+
         <th>
 
           <form method="post" action="{{`/customers/${customer.id}/?_method=delete`}}">

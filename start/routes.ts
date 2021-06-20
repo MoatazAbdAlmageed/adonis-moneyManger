@@ -12,7 +12,7 @@ Route.get("/register", "AuthController.showRegister").middleware("guest");
 Route.post("/register", "AuthController.register");
 
 Route.group(() => {
-  Route.get("/", "AuthController.dashboard");
+  Route.get("/", "DashboardController.dashboard");
 
   /**
    * TransactionsController

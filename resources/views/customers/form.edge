@@ -23,6 +23,38 @@ value="{{flashMessages.get('name') || ''}}"
 
 <div class="control">
 <div class="field">
+<label class="label">Phone</label>
+@if(flashMessages.has('errors.phone'))
+<p class="help is-danger"> {{flashMessages.get('errors.phone')}} </p>
+@endif
+<input class="input"
+required
+type="phone"
+value="{{flashMessages.get('phone') || ''}}"
+placeholder="Your Phone"
+name="phone" >
+</div>
+</div>
+
+
+<div class="control">
+<div class="field">
+<label class="label">Address</label>
+@if(flashMessages.has('errors.address'))
+<p class="help is-danger"> {{flashMessages.get('errors.address')}} </p>
+@endif
+<input class="input"
+required
+type="address"
+value="{{flashMessages.get('address') || ''}}"
+placeholder="Your Address"
+name="address" >
+</div>
+</div>
+
+
+<div class="control">
+<div class="field">
 <label class="label">Email</label>
 @if(flashMessages.has('errors.email'))
 <p class="help is-danger"> {{flashMessages.get('errors.email')}} </p>
@@ -36,21 +68,6 @@ name="email" >
 </div>
 </div>
 
-
-<div class="control">
-  <div class="field">
-  <label class="label">Avatar</label>
-  @if(flashMessages.has('errors.avatar'))
-  <p class="help is-danger"> {{flashMessages.get('errors.avatar')}} </p>
-  @endif
-  <input class="input"
-  required
-  type="text"
-  value="{{flashMessages.get('avatar') || ''}}"
-  placeholder="Your Avatar"
-  name="avatar" >
-  </div>
-  </div>
 
 
   <div class="control">
@@ -71,14 +88,6 @@ name="email" >
   </div>
 
 
-<div class="control">
-<div class="field">
-<label class="label">Date Of Birth</label>
-
-
-<input class="input"   type="date" name="dateOfBirth">
-</div>
-</div>
 
 
 <div class="control">

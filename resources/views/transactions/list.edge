@@ -11,6 +11,8 @@
       <th>Amount</th>
       <th>Type</th>
       <th>Details</th>
+      <th>createdAt</th>
+      <th>updatedAt</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,6 +26,8 @@
         <th>{{ transaction.amount }} </th>
         <th>{{ transaction.type }} </th>
         <th>{{ transaction.details }} </th>
+        <th>{{ transaction.createdAt }} </th>
+        <th>{{ transaction.updatedAt }} </th>
         <th>
           <form method="post" action="{{`/transactions/${transaction.id}/?_method=delete`}}">
             {{csrfField()}}

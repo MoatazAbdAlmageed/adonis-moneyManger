@@ -80,9 +80,9 @@ export default class ReservationsController {
     response,
     session,
     params,
+    auth,
   }: HttpContextContract) {
     const validationSchema = schema.create({
-      userId: schema.number(),
       customerId: schema.number(),
       bookableId: schema.number(),
       quantity: schema.number(),
@@ -93,7 +93,6 @@ export default class ReservationsController {
       const validationData = await request.validate({
         schema: validationSchema,
         messages: {
-          "userId.required": "userId Is required",
           "customerId.required": "customerId Is required",
           "bookableId.required": "bookableId Is required",
           "quantity.required": "quantity Is required",
@@ -101,16 +100,15 @@ export default class ReservationsController {
           "notes.required": "notes Is required",
         },
       });
-      const { userId, customerId, bookableId, quantity, price, notes } =
-        validationData;
+      const { customerId, bookableId, quantity, price, notes } = validationData;
+
+      // return validationData;
       const reservation = await Reservation.findOrFail(params.id);
-      reservation.userId = userId;
       reservation.customerId = customerId;
       reservation.bookableId = bookableId;
       reservation.quantity = quantity;
       reservation.price = price;
       reservation.notes = notes;
-      // TODO:save dateOfBirth
       reservation.save();
       session.flash("notification", "Reservation Updated!");
       response.redirect("/reservations");

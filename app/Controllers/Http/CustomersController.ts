@@ -32,6 +32,8 @@ export default class CustomersController {
       ]),
       email: schema.string(),
       gender: schema.string(),
+      phone: schema.string(),
+      address: schema.string(),
     });
 
     try {
@@ -42,18 +44,21 @@ export default class CustomersController {
           "name.maxLength": "Name maxLength is 255",
           "name.minLength": "Name minLength is 5",
           "email.required": "Email Is required",
+          "phone.required": "Phone Is required",
+          "adress.required": "Adress Is required",
         },
       });
-      const { name, email, gender } = validationData;
+      const { name, email, gender, phone, address } = validationData;
+
       Customer.create({
         name,
         email,
         gender,
-        avatar: request.input("avatar"),
+        phone,
+        address,
         bio: request.input("bio"),
-        // TODO:save dateOfBirth
-        // dateOfBirth,
       });
+
       session.flash("notification", "Customer Created!");
       response.redirect("/customers");
     } catch (error) {
@@ -74,6 +79,8 @@ export default class CustomersController {
       ]),
       email: schema.string(),
       gender: schema.string(),
+      phone: schema.string(),
+      address: schema.string(),
     });
 
     const validationData = await request.validate({
@@ -83,16 +90,18 @@ export default class CustomersController {
         "name.maxLength": "Name maxLength is 255",
         "name.minLength": "Name minLength is 5",
         "email.required": "Email Is required",
+        "phone.required": "Phone Is required",
+        "address.required": "Address Is required",
       },
     });
-    const { name, email, gender } = validationData;
+    const { name, email, gender, phone, address } = validationData;
     const customer = await Customer.findOrFail(params.id);
     customer.name = name;
     customer.email = email;
+    customer.phone = phone;
+    customer.address = address;
     customer.gender = gender;
-    customer.avatar = request.input("avatar");
     customer.bio = request.input("bio");
-    // TODO:save dateOfBirth
     customer.save();
     session.flash("notification", "Customer Updated!");
     response.redirect("/customers");

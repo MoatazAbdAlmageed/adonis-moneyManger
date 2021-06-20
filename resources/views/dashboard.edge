@@ -2,8 +2,27 @@
 @section('content')
 <div class="card">
   <div class="card-content">
-    dashboard
+<div class="columns">
+    <div class="column">
+     Transactions <span class="tag is-danger">{{transactions}}</span>
+    </div>
+    <div class="column">
+      Customers <span class="tag is-black">{{customers}}</span>
+    </div>
+    <div class="column">
+      Bookables <span class="tag is-success">{{bookables}}</span>
+    </div>
+    <div class="column">
+      Reservations <span class="tag is-warning">{{reservations}}</span>
+    </div>
+    <div class="column">
+      Users <span class="tag is-warning">{{users}}</span>
+    </div>
   </div>
+
+</div>
+
+
 </div>
 @endsection
 

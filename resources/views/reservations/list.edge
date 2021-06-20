@@ -12,6 +12,8 @@
       <th>Quantity</th>
       <th>Price</th>
       <th>Notes</th>
+      <th>createdAt</th>
+      <th>updatedAt</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -26,6 +28,8 @@
         <th>{{ reservation.quantity }} </th>
         <th>{{ reservation.price }} </th>
         <th>{{ reservation.notes }} </th>
+        <th>{{ reservation.createdAt }} </th>
+        <th>{{ reservation.updatedAt }} </th>
         <th>
 
           <form method="post" action="{{`/reservations/${reservation.id}/?_method=delete`}}">
