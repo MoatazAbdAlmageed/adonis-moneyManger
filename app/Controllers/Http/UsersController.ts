@@ -7,17 +7,17 @@ export default class UsersController {
     const limit = 5;
     const page = request.input("page", 1);
     const users = await User.query().paginate(page, limit);
-    return view.render("users.index", { users });
+    return view.render("users/index", { users });
   }
 
   public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const user = await User.find(params.id);
-    return view.render("users.edit", { user });
+    return view.render("users/edit", { user });
   }
   public async add(httpContextContract: HttpContextContract) {
     const { view } = httpContextContract;
-    return view.render("users.add");
+    return view.render("users/add");
   }
 
   public async store({ request, response, session }: HttpContextContract) {

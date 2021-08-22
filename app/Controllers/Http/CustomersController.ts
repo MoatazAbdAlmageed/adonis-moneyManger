@@ -7,17 +7,17 @@ export default class CustomersController {
     const limit = 5;
     const page = request.input("page", 1);
     const customers = await Customer.query().paginate(page, limit);
-    return view.render("customers.index", { customers });
+    return view.render("customers/index", { customers });
   }
 
   public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const customer = await Customer.find(params.id);
-    return view.render("customers.edit", { customer });
+    return view.render("customers/edit", { customer });
   }
   public async add(httpContextContract: HttpContextContract) {
     const { view } = httpContextContract;
-    return view.render("customers.add");
+    return view.render("customers/add");
   }
 
   public async store({ request, response, session }: HttpContextContract) {

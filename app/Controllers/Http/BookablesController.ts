@@ -9,20 +9,20 @@ export default class BookablesController {
     const limit = 5;
     const page = request.input("page", 1);
     const bookables = await Bookable.query().paginate(page, limit);
-    return view.render("bookables.index", { bookables });
+    return view.render("bookables/index", { bookables });
   }
   public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const users = await User.all();
     const customers = await Customer.all();
     const bookable = await Bookable.find(params.id);
-    return view.render("bookables.edit", { bookable, users, customers });
+    return view.render("bookables/edit", { bookable, users, customers });
   }
   public async add(httpContextContract: HttpContextContract) {
     const users = await User.all();
     const customers = await Customer.all();
     const { view } = httpContextContract;
-    return view.render("bookables.add", { users, customers });
+    return view.render("bookables/add", { users, customers });
   }
 
   public async store({ request, response, session }: HttpContextContract) {

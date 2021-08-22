@@ -13,7 +13,7 @@ export default class ReservationsController {
       .preload("user")
       .preload("customer")
       .paginate(page, limit);
-    return view.render("reservations.index", { reservations });
+    return view.render("reservations/index", { reservations });
   }
   public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
@@ -21,7 +21,7 @@ export default class ReservationsController {
     const customers = await Customer.all();
     const reservation = await Reservation.find(params.id);
     const bookables = await Bookable.all();
-    return view.render("reservations.edit", {
+    return view.render("reservations/edit", {
       reservation,
       users,
       customers,
@@ -34,7 +34,7 @@ export default class ReservationsController {
     const customers = await Customer.all();
     const bookables = await Bookable.all();
     const { view } = httpContextContract;
-    return view.render("reservations.add", { users, customers, bookables });
+    return view.render("reservations/add", { users, customers, bookables });
   }
 
   public async store({

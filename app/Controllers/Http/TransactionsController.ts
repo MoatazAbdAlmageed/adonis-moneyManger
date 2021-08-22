@@ -12,20 +12,20 @@ export default class TransactionsController {
       .preload("user")
       .preload("customer")
       .paginate(page, limit);
-    return view.render("transactions.index", { transactions });
+    return view.render("transactions/index", { transactions });
   }
   public async edit(httpContextContract: HttpContextContract) {
     const { params, view } = httpContextContract;
     const users = await User.all();
     const customers = await Customer.all();
     const transaction = await Transaction.find(params.id);
-    return view.render("transactions.edit", { transaction, users, customers });
+    return view.render("transactions/edit", { transaction, users, customers });
   }
   public async add(httpContextContract: HttpContextContract) {
     const users = await User.all();
     const customers = await Customer.all();
     const { view } = httpContextContract;
-    return view.render("transactions.add", { users, customers });
+    return view.render("transactions/add", { users, customers });
   }
 
   public async store({
